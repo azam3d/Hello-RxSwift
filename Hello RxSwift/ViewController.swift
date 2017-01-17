@@ -28,9 +28,24 @@ class ViewController: UIViewController {
             .addDisposableTo(disposeBag)
         
         speakerListTableView.rx.modelSelected(Speaker.self)
-            .subscribe() { speaker in
+            .subscribe(onNext: { speaker in
                 print("You selected \(speaker)")
-            }
+            })
             .addDisposableTo(disposeBag)
+        
+        
+        
+        //test
+        func exampleOf(description: String, action: (Void) -> Void) {
+            print("\n--- Example of:", description, "---")
+            action()
+        }
+        
+        exampleOf(description: "just") {
+            Observable.just(32)
+                .subscribe {
+                    print($0)
+            }
+        }
     }
 }
